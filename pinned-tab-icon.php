@@ -4,7 +4,7 @@ Plugin Name: Pinned Tab Icon
 Plugin URI: http://jessedyck.me
 Description: A WordPress Plugin that adds Customizer controls to select an SVG Image file and set the colour, for use in Safari 9's Pinned Tab feature. See https://support.apple.com/kb/PH21462?locale=en_US for details from Apple.
 Author: Jesse Dyck
-Version: 1.0
+Version: 1.02
 Author URI: http://jessedyck.me
 */
 
@@ -95,11 +95,11 @@ add_action ( 'wp_head', 'jd_mask_icon' );
 
 function jd_is_svg ($id)
 {
-	$id = (int) $id;
-	
-	if ( !$id > -1 )
+	if ( !is_numeric($id) )
 		return false; 
-		
+	
+	$id = (int)$id;	
+	
 	return ( get_post_mime_type ( $id ) == 'image/svg+xml' ? true : false );
 }
 
