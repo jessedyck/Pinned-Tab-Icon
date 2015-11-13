@@ -62,7 +62,7 @@ add_action( 'customize_register', 'jd_mask_icon_customizer' );
 // Add SVG support if not already existing
 function jd_custom_upload_mimes ( $existing_mimes = array() )
 {
-	if ($existing_mimes['svg'] != 'image/svg+xml')
+	if (empty ($existing_mimes['svg']) || $existing_mimes['svg'] != 'image/svg+xml')
 		$existing_mimes['svg'] = 'image/svg+xml';
 		
 	return $existing_mimes;
@@ -80,7 +80,7 @@ function jd_mask_icon ()
 		return;
 		
 	$img_url = wp_get_attachment_url ( $img_id );
-	
+		
 	$colour = get_option ( 'mask_icon_colour' );
 	
 	// Check again that we have a valid hex code
@@ -95,7 +95,9 @@ add_action ( 'wp_head', 'jd_mask_icon' );
 
 function jd_is_svg ($id)
 {
-	if ( !$id || !is_int( $id ) )
+	$id = (int) $id;
+	
+	if ( !$id > -1 )
 		return false; 
 		
 	return ( get_post_mime_type ( $id ) == 'image/svg+xml' ? true : false );
