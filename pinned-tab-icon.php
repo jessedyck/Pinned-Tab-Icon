@@ -65,6 +65,9 @@ function jd_custom_upload_mimes ( $existing_mimes = array() )
 	if (empty ($existing_mimes['svg']) || $existing_mimes['svg'] != 'image/svg+xml')
 		$existing_mimes['svg'] = 'image/svg+xml';
 		
+	if (empty ($existing_mimes['svgz']) || $existing_mimes['svgz'] != 'image/svg+xml')
+		$existing_mimes['svgz'] = 'image/svg+xml';
+	
 	return $existing_mimes;
 }
 add_filter('upload_mimes', 'jd_custom_upload_mimes');
